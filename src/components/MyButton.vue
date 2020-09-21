@@ -1,5 +1,8 @@
 <template>
-  <button :style="{ background, color }">
+  <button
+    :style="{ background, color }"
+    :disabled="disabled"
+  >
     Button
   </button>
 </template>
@@ -34,6 +37,13 @@ export default {
     cursor: pointer;
     &:hover {
       filter:brightness(125%);
+    }
+    &:disabled {
+      opacity: 0.5;
+      &:hover {
+        filter:brightness(100%);
+        cursor: default;
+      }
     }
   }
 </style>
