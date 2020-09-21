@@ -5,18 +5,18 @@
       <div class="col-sm-6">
         <form @submit.prevent="submit($event)">
           <my-input
+            v-model:value="form.username"
+            v-model:valid="form.usernameValid"
             name="Username"
             :rules="{ required: true, min: 5}"
-            :value="form.username.value"
             type="text"
-            @update="update"
           />
           <my-input
+            v-model:value="form.password"
+            v-model:valid="form.passwordValid"
             name="Password"
             :rules="{ required: true, min: 10}"
-            :value="form.password.value"
             type="password"
-            @update="update"
           />
           <my-button
             color="white"
@@ -24,6 +24,8 @@
             :disabled="!valid"
           />
         </form>
+      </div>
+      <div class="col-sm-6">
       </div>
     </div>
   </div>
@@ -43,25 +45,14 @@ export default {
   },
   setup() {
     const form = ref({
-      username: {
-        value: '',
-        valid: false
-      },
-      password: {
-        value: '',
-        valid: false
-      }
+      username: '',
+      usernameValid: false,
+      password: '',
+      passwordValid: false
     });
 
-    const update = (payload) => {
-      form.value[payload.name.toLowerCase()] = {
-        value: payload.value,
-        valid: payload.valid
-      };
-    };
-
     const valid = computed(() => {
-      return form.value.username.valid && form.value.password.valid;
+      return form.value.usernameValid && form.value.passwordValid;
     });
 
     const submit = ($event) => {
@@ -70,7 +61,6 @@ export default {
 
     return {
       form,
-      update,
       valid,
       submit
     };

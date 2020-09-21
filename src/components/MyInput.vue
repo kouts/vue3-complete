@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
 export default {
   props: {
@@ -31,9 +31,12 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    valid: {
+      type: Boolean
     }
   },
-  emits: ['update'],
+  emits: ['update:value', 'update:valid'],
   setup(props, ctx) {
     const error = computed(() => {
       return validate(props.value);
@@ -49,12 +52,9 @@ export default {
     };
 
     const input = ($event) => {
-      ctx.emit('update', {
-        value: $event.target.value,
-        name: props.name,
-        // eslint-disable-next-line no-unneeded-ternary
-        valid: validate($event.target.value) ? false : true
-      });
+      ctx.emit('update:value', $event.target.value);
+      // eslint-disable-next-line no-unneeded-ternary
+      ctx.emit('update:valid', validate($event.target.value) ? false : true);
     };
 
     return {
