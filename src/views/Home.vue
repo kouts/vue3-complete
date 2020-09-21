@@ -7,10 +7,16 @@
     <my-input
       name="Username"
       :rules="{ required: true, min: 5}"
+      :value="form.username.value"
+      type="text"
+      @update="update"
     />
     <my-input
       name="Password"
       :rules="{ required: true, min: 10}"
+      :value="form.password.value"
+      type="password"
+      @update="update"
     />
     <my-button
       color="white"
@@ -21,7 +27,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 import MyButton from '@/components/MyButton.vue';
 import MyInput from '@/components/MyInput.vue';
@@ -34,8 +40,31 @@ export default {
     MyInput
   },
   setup() {
-    const valid = ref(true);
+    const form = ref({
+      username: {
+        value: '',
+        valid: false
+      },
+      password: {
+        value: '',
+        valid: false
+      }
+    });
+
+    const update = (payload) => {
+      form.value[payload.name.toLowerCase()] = {
+        value: payload.value,
+        valid: payload.valid
+      };
+    };
+
+    const valid = computed(() => {
+      return form.value.username.valid && form.value.password.valid;
+    });
+
     return {
+      form,
+      update,
       valid
     };
   }

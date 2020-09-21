@@ -3,8 +3,9 @@
     <label :for="name" class="">{{ name }}</label>
     <input
       :id="name"
-      v-model="value"
-      type="text"
+      :value="value"
+      :type="type"
+      @input="input($event)"
     />
     <small class="text-danger">{{ error }}</small>
   </div>
@@ -15,6 +16,10 @@ import { ref, computed } from 'vue';
 
 export default {
   props: {
+    type: {
+      type: String,
+      default: 'text'
+    },
     name: {
       type: String,
       required: true
@@ -22,27 +27,39 @@ export default {
     rules: {
       type: Object, // required, min
       default: () => ({})
+    },
+    value: {
+      type: String,
+      default: ''
     }
-    // disabled: {
-    //   type: Boolean,
-    //   default: false
-    // }
   },
-  setup(props) {
-    const value = ref('');
-
+  emits: ['update'],
+  setup(props, ctx) {
     const error = computed(() => {
-      if (props.rules.required && !value.value.length) {
-        return 'Required';
-      }
-      if (props.rules.min && value.value.length < props.rules.min) {
-        return `A minimum of ${props.rules.min} characters is required`;
-      }
+      return validate(props.value);
     });
 
+    const validate = (value) => {
+      if (props.rules.required && !value.length) {
+        return 'Required';
+      }
+      if (props.rules.min && value.length < props.rules.min) {
+        return `A minimum of ${props.rules.min} characters is required`;
+      }
+    };
+
+    const input = ($event) => {
+      ctx.emit('update', {
+        value: $event.target.value,
+        name: props.name,
+        // eslint-disable-next-line no-unneeded-ternary
+        valid: validate($event.target.value) ? false : true
+      });
+    };
+
     return {
-      value,
-      error
+      error,
+      input
     };
   }
 };
