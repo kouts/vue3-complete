@@ -4,8 +4,13 @@
       <img alt="Vue logo" src="../assets/logo.png" class="text-center">
     </div>
     <hello-world msg="Welcome to Vue.js 3 starter template" />
-    <my-input 
+    <my-input
       name="Username"
+      :rules="{ required: true, min: 5}"
+    />
+    <my-input
+      name="Password"
+      :rules="{ required: true, min: 10}"
     />
     <my-button
       color="white"
