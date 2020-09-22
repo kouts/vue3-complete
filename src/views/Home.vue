@@ -46,7 +46,7 @@ export default {
     const fetchPokemons = async() => await Promise.all(ids.map(id => fetchPokemon(id)));
     (async() => {
       starters.value = await fetchPokemons();
-      console.log(starters);
+      // console.log(starters);
     })();
 
     return {
