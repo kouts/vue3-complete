@@ -1,40 +1,56 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="card">
-          <div class="card-header">
-            Featured
-          </div>
-          <div class="card-body">
-            Content
-          </div>
-          <div class="card-footer">
-            Card footer
-          </div>
-        </div>
+    <div class="form-row">
+      <div v-for="starter in starters" :key="starter.name" class="col-sm-2">
+        <card-pokemon>
+          <template #title>
+            {{ starter.name }}
+          </template>
+          <template #content>
+            <img class="card-img-top" loading="lazy" :src="starter.sprite" :alt="starter.name" />
+          </template>
+          <template #description>
+            <span v-for="type in starter.types" :key="type" class="badge badge-pill badge-primary mr-2">
+              {{ type }}
+            </span>
+          </template>
+        </card-pokemon>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue';
+import CardPokemon from '@/components/CardPokemon.vue';
+
 export default {
-  setup() {
+  components: {
+    CardPokemon
+  },
+  setup(props, ctx) {
     const api = 'https://pokeapi.co/api/v2/pokemon';
-    const fetchData = async() => {
-      const response = await window.fetch(`${api}/1`);
+    const ids = [1, 4, 7];
+    const starters = ref([]);
+
+    const fetchPokemon = async(id) => {
+      const response = await window.fetch(`${api}/${id}`);
       const data = await response.json();
-      const pokemon = {
+      return {
         name: data.name,
-        sprite: data.sprites.other['official-artwork'],
-        types: data.types.map(o => ({ name: o.type.name }))
+        sprite: data.sprites.front_default,
+        types: data.types.map(o => o.type.name)
       };
-      console.log(pokemon);
     };
-    fetchData();
+
+    const fetchPokemons = async() => await Promise.all(ids.map(id => fetchPokemon(id)));
+    (async() => {
+      starters.value = await fetchPokemons();
+      console.log(starters);
+    })();
+
     return {
-      //
+      starters
     };
   }
 };
