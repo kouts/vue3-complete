@@ -2,49 +2,24 @@
   <div class="container">
     <h1 class="mb-4">Pokémons</h1>
     <div class="form-row mb-4">
-      <div v-for="starter in starters" :key="starter.name" class="col-sm-2">
-        <card-pokemon :class="[selectedId !== starter.id && 'inactive']" @click="selectPokemon(starter.id)">
-          <template #title>
-            {{ starter.name }} #{{ starter.id }}
-          </template>
-          <template #content>
-            <img class="card-img-top" loading="lazy" :src="starter.sprite" :alt="starter.name" />
-          </template>
-          <template #description>
-            <span v-for="type in starter.types" :key="type" class="badge badge-pill badge-primary mr-2">
-              {{ type }}
-            </span>
-          </template>
-        </card-pokemon>
-      </div>
+      <cards-pokemon :pokemons="starters" :selected-id="selectedId" @select="selectPokemon" />
     </div>
-    <div v-if="evolutions.length" class="form-row mb-4">
-      <div v-for="creature in evolutions" :key="creature.name" class="col-sm-2">
-        <card-pokemon class="bg-light">
-          <template #title>
-            {{ creature.name }} #{{ creature.id }}
-          </template>
-          <template #content>
-            <img class="card-img-top" loading="lazy" :src="creature.sprite" :alt="creature.name" />
-          </template>
-          <template #description>
-            <span v-for="type in creature.types" :key="type" class="badge badge-pill badge-primary mr-2">
-              {{ type }}
-            </span>
-          </template>
-        </card-pokemon>
+    <div v-if="evolutions.length">
+      <h3>{{ selectedName }}'s evolutions</h3>
+      <div class="form-row mb-4">
+        <cards-pokemon :pokemons="evolutions" :clickable="false" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
-import CardPokemon from '@/components/CardPokemon.vue';
+import { ref, computed } from 'vue';
+import CardsPokemon from '@/components/CardsPokemon.vue';
 
 export default {
   components: {
-    CardPokemon
+    CardsPokemon
   },
   setup(props, ctx) {
     const api = 'https://pokeapi.co/api/v2/pokemon';
@@ -71,6 +46,10 @@ export default {
       selectedId.value = id;
     };
 
+    const selectedName = computed(() => {
+      return starters.value.find((o) => o.id === selectedId.value)?.name;
+    });
+
     (async() => {
       starters.value = await fetchPokemons(startersIds);
       // console.log(starters);
@@ -80,18 +59,9 @@ export default {
       starters,
       evolutions,
       selectPokemon,
-      selectedId
+      selectedId,
+      selectedName
     };
   }
 };
 </script>
-
-<style lang="scss" scoped>
-  .inactive {
-    cursor: pointer;
-    opacity: 0.5;
-    &:hover {
-      opacity: 0.7;
-    }
-  }
-</style>
