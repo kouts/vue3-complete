@@ -1,5 +1,5 @@
-# vue3-starter-template
-A single page app starter template created to easily bootstrap Vue.js 3 apps.
+# vue3-complete
+A single page app starter template created to test out Vue.js 3 features.
 
 **Features**
 - Vuex 4 for state management
