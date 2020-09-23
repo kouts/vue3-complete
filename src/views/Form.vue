@@ -26,16 +26,29 @@
         </form>
       </div>
       <div class="col-sm-6">
+        <div class="row mb-4">
+          <div class="col-sm-6">
+            {{ firstName }}
+            <button type="button" class="btn btn-primary ml-2" @click="firstName === 'Giannis' ? firstName = 'George' : firstName = 'Giannis'">
+              Toggle name
+            </button>
+          </div>
+          <div class="col-sm-6">
+            <h3>Mouse position</h3>
+            {{ x }} - {{ y }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import { reactive, toRefs, ref, computed } from 'vue';
 import MyButton from '@/components/MyButton.vue';
 import MyInput from '@/components/MyInput.vue';
 import { clone } from '@/common/utils';
+import { useMousePosition } from '@/composables/useMousePosition';
 
 export default {
   name: 'Home',
@@ -44,6 +57,13 @@ export default {
     MyInput
   },
   setup() {
+    const data = reactive({
+      firstName: 'Giannis',
+      lastName: 'Koutsaftakis'
+    });
+
+    const { x, y } = useMousePosition();
+
     const form = ref({
       username: '',
       usernameValid: false,
@@ -62,7 +82,10 @@ export default {
     return {
       form,
       valid,
-      submit
+      submit,
+      ...toRefs(data),
+      x,
+      y
     };
   }
 };
