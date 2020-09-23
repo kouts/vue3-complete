@@ -2,7 +2,7 @@
   <div v-for="pokemon in pokemons" :key="pokemon.name" class="col-sm-2">
     <card-pokemon
       :class="[(clickable && selectedId !== pokemon.id) && 'inactive clickable']"
-      @click="emit('select', pokemon.id)"
+      @click="$emit('select', pokemon.id)"
     >
       <template #title>
         {{ pokemon.name }} #{{ pokemon.id }}
@@ -40,12 +40,7 @@ export default {
       default: true
     }
   },
-  emits: ['select'],
-  setup(props, { emit }) {
-    return {
-      emit
-    };
-  }
+  emits: ['select']
 };
 </script>
 
