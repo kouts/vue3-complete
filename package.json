@@ -15,7 +15,8 @@
     "core-js": "^3.6.5",
     "vue": "^3.0.0-0",
     "vue-router": "^4.0.0-beta.9",
-    "vuex": "^4.0.0-beta.4"
+    "vuex": "^4.0.0-beta.4",
+    "vuex-composition-helpers": "^1.0.21"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.3.0",

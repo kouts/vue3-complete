@@ -1,7 +1,6 @@
 import { toRefs, reactive, onMounted, onUnmounted } from 'vue';
 
 export function useMousePosition() {
-
   const pos = reactive({
     x: 0,
     y: 0

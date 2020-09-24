@@ -57,6 +57,15 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '/vuex-tests',
+    name: 'VuexTests',
+    component: () => import(/* webpackChunkName: "vuex-tests" */ '../views/VuexTests.vue'),
+    meta: {
+      layout: 'default',
+      showInNavbar: true
+    }
   }
 ];
 const router = createRouter({
