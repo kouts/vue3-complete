@@ -6,12 +6,12 @@
     </div>
     <div class="form-row">
       <div v-for="post in filteredPosts" :key="post.id" class="col-sm-3">
-        <card-post>
+        <card-post class="h-100">
           <template #title>
             {{ post.title }}
           </template>
           <template #content>
-            {{ post.title }}
+            {{ post.content }}
           </template>
           <template #description>
             <card-post-controls :post="post" />

@@ -12,6 +12,11 @@ class Store {
   setHashtag(hashtag) {
     this.state.currentHashtag = hashtag;
   };
+
+  incrementLike(post) {
+    const thePost = this.state.posts.find(item => item.id === post.id);
+    thePost.likes = thePost.likes + 1;
+  }
 };
 
 export const storeBlog = new Store();
