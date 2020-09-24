@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { storeBlog } from '@/store-blog/storeBlog';
 import CardPost from '@/components/CardPost';
 import CardPostControls from '@/components/CardPostControls';
@@ -39,30 +39,14 @@ export default {
     CardPostControls
   },
   setup() {
-    const searchText = ref('');
-
-    const inputSearch = (e) => {
-      searchText.value = e.target.value;
-    };
-
     const currentHashtag = computed(() => storeBlog.state.currentHashtag);
-
-    const filteredPosts = computed(() => {
-      let filtered = storeBlog.state.posts;
-      if (currentHashtag.value !== '') {
-        filtered = storeBlog.state.posts.filter(post => post.hashtags.includes(currentHashtag.value));
-      }
-      if (searchText.value !== '') {
-        filtered = storeBlog.state.posts.filter(post => post.content.includes(searchText.value));
-      }
-      return filtered;
-    });
-
+    const inputSearch = (e) => {
+      storeBlog.setSearchText(e.target.value);
+    };
     return {
-      filteredPosts,
+      filteredPosts: storeBlog.filteredPosts,
       currentHashtag,
-      inputSearch,
-      searchText
+      inputSearch
     };
   }
 };

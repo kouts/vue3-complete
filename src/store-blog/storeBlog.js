@@ -1,13 +1,31 @@
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 import { testPosts } from './testPosts';
 
 class Store {
   constructor() {
     this.state = reactive({
       posts: testPosts,
-      currentHashtag: ''
+      currentHashtag: '',
+      searchText: ''
     });
   }
+
+  get filteredPosts() {
+    return computed(() => {
+      let filtered = this.state.posts;
+      if (this.state.currentHashtag !== '') {
+        filtered = this.state.posts.filter(post => post.hashtags.includes(this.state.currentHashtag));
+      }
+      if (this.state.searchText !== '') {
+        filtered = this.state.posts.filter(post => post.content.includes(this.state.searchText));
+      }
+      return filtered;
+    });
+  }
+
+  setSearchText(searchText) {
+    this.state.searchText = searchText;
+  };
 
   setHashtag(hashtag) {
     this.state.currentHashtag = hashtag;
