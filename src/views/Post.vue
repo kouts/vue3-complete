@@ -1,12 +1,7 @@
 <template>
-  <div class="container">
+  <div>
     <h3>{{ post.title }}</h3>
     <p>{{ post.contentDetails }}</p>
-    <div class="">
-      <router-link to="/posts" class="float-right">
-        &larr; Back
-      </router-link>
-    </div>
   </div>
 </template>
 

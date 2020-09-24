@@ -46,16 +46,17 @@ const routes = [
     meta: {
       layout: 'default',
       showInNavbar: true
-    }
-  },
-  {
-    path: '/posts/:id',
-    name: 'Post',
-    component: () => import(/* webpackChunkName: "post" */ '../views/Post.vue'),
-    meta: {
-      layout: 'default',
-      showInNavbar: false
-    }
+    },
+    children: [
+      {
+        path: '/posts/:id',
+        name: 'Post',
+        component: () => import(/* webpackChunkName: "post" */ '../views/Post.vue'),
+        meta: {
+          showInNavbar: false
+        }
+      }
+    ]
   }
 ];
 const router = createRouter({

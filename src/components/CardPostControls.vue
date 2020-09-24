@@ -1,10 +1,17 @@
 <template>
   <div class="d-flex flex-column">
-    <div class="mb-2">
-      <button type="button" class="btn btn-sm btn-outline-secondary mr-2" @click="incrementLike(post)">
-        Like
-      </button>
-      {{ post.likes }}
+    <div class="mb-2 d-flex flex-row justify-content-between">
+      <div>
+        <button type="button" class="btn btn-sm btn-outline-secondary mr-2" @click="incrementLike(post)">
+          Like
+        </button>
+        {{ post.likes }}
+      </div>
+      <div>
+        <router-link :to="`/posts/${post.id}`">
+          Details
+        </router-link>
+      </div>
     </div>
     <div>
       <card-post-controls-hashtag
