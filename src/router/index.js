@@ -34,6 +34,14 @@ const routes = [
     meta: {
       layout: 'default'
     }
+  },
+  {
+    path: '/posts',
+    name: 'Posts',
+    component: () => import(/* webpackChunkName: "posts" */ '../views/Posts.vue'),
+    meta: {
+      layout: 'default'
+    }
   }
 ];
 const router = createRouter({
