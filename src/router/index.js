@@ -26,6 +26,14 @@ const routes = [
     meta: {
       layout: 'default'
     }
+  },
+  {
+    path: '/numbers',
+    name: 'Numbers',
+    component: () => import(/* webpackChunkName: "numbers" */ '../views/Numbers.vue'),
+    meta: {
+      layout: 'default'
+    }
   }
 ];
 const router = createRouter({
