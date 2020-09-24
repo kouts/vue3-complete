@@ -15,7 +15,9 @@
       <div id="navbarDefault" :class="['collapse navbar-collapse', navbarExpanded && 'show']">
         <ul class="navbar-nav mr-auto">
           <li v-for="route in routes" :key="route.name" class="nav-item">
-            <router-link :to="route.path" class="nav-link" @click="collapseNavbar">{{ route.name }}</router-link>
+            <template v-if="route.meta.showInNavbar">
+              <router-link :to="route.path" class="nav-link" @click="collapseNavbar">{{ route.name }}</router-link>
+            </template>
           </li>
         </ul>
       </div>

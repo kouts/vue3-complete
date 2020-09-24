@@ -8,7 +8,8 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: {
-      layout: 'default'
+      layout: 'default',
+      showInNavbar: true
     }
   },
   {
@@ -16,7 +17,8 @@ const routes = [
     name: 'Form',
     component: () => import(/* webpackChunkName: "form" */ '../views/Form.vue'),
     meta: {
-      layout: 'default'
+      layout: 'default',
+      showInNavbar: true
     }
   },
   {
@@ -24,7 +26,8 @@ const routes = [
     name: 'Pokemons',
     component: () => import(/* webpackChunkName: "pokemons" */ '../views/Pokemons.vue'),
     meta: {
-      layout: 'default'
+      layout: 'default',
+      showInNavbar: true
     }
   },
   {
@@ -32,7 +35,8 @@ const routes = [
     name: 'Numbers',
     component: () => import(/* webpackChunkName: "numbers" */ '../views/Numbers.vue'),
     meta: {
-      layout: 'default'
+      layout: 'default',
+      showInNavbar: true
     }
   },
   {
@@ -40,7 +44,17 @@ const routes = [
     name: 'Posts',
     component: () => import(/* webpackChunkName: "posts" */ '../views/Posts.vue'),
     meta: {
-      layout: 'default'
+      layout: 'default',
+      showInNavbar: true
+    }
+  },
+  {
+    path: '/posts/:id',
+    name: 'Post',
+    component: () => import(/* webpackChunkName: "post" */ '../views/Post.vue'),
+    meta: {
+      layout: 'default',
+      showInNavbar: false
     }
   }
 ];

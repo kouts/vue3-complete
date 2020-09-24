@@ -13,7 +13,9 @@
       <div v-for="post in filteredPosts" :key="post.id" class="col-sm-3">
         <card-post class="h-100">
           <template #title>
-            {{ post.title }}
+            <router-link :to="`/posts/${post.id}`">
+              {{ post.title }}
+            </router-link>
           </template>
           <template #content>
             {{ post.content }}
