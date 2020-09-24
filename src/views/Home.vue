@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="mb-4">Blog</h1>
-    <div class="row">
+    <div class="form-row">
       <div v-for="post in storeBlog.state.posts" :key="post.id" class="col-sm-3">
         <card-post>
           <template #title>
