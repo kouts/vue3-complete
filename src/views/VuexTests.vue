@@ -38,12 +38,12 @@ import { useStore } from 'vuex';
 export default {
   setup() {
     const store = useStore();
-    const posts = computed(() => store.state.posts);
-    const currentPost = computed(() => store.state.currentPost);
-    const loadingPosts = computed(() => store.state.loadingPosts);
+    const posts = computed(() => store.state.posts.posts);
+    const currentPost = computed(() => store.state.posts.currentPost);
+    const loadingPosts = computed(() => store.state.posts.loadingPosts);
 
     const fetchPost = (id) => {
-      store.dispatch('fetchPost', id);
+      store.dispatch('posts/fetchPost', id);
     };
 
     return {
