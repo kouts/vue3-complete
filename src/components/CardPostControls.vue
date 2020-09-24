@@ -8,7 +8,7 @@
     <div>
       <card-post-controls-hashtag
         v-for="hashtag in post.hashtags"
-        :key="hashtag" 
+        :key="hashtag"
         :hashtag="hashtag"
       />
     </div>
@@ -27,15 +27,6 @@ export default {
       type: Object,
       default: () => ({})
     }
-  },
-  setup(props) {
-    return {
-
-    };
   }
 };
 </script>
-
-<style lang="scss" scoped>
-
-</style>
