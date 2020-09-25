@@ -1,12 +1,12 @@
 import { createStore } from 'vuex';
 import { posts } from './posts';
-import { photos } from './photos';
 import { albums } from './albums';
+import { photos } from './photos';
 
 export const store = createStore({
   modules: {
     posts,
-    photos,
-    albums
+    albums,
+    photos
   }
 });

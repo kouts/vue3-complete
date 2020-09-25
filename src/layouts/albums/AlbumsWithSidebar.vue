@@ -3,7 +3,7 @@
     <default-nav />
     <div class="container-fluid">
       <div class="row">
-        <default-sidebar />
+        <albums-sidebar />
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           <slot />
         </main>
@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import DefaultNav from './DefaultNav.vue';
-import DefaultSidebar from './DefaultSidebar.vue';
-import DefaultFooter from './DefaultFooter.vue';
+import DefaultNav from '@/layouts/default/DefaultNav.vue';
+import AlbumsSidebar from './AlbumsSidebar.vue';
+import DefaultFooter from '@/layouts/default/DefaultFooter.vue';
 
 export default {
   components: {
     DefaultNav,
-    DefaultSidebar,
+    AlbumsSidebar,
     DefaultFooter
   }
 };
