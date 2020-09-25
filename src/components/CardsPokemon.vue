@@ -1,7 +1,7 @@
 <template>
   <div v-for="pokemon in pokemons" :key="pokemon.name" class="col-sm-2">
     <card-pokemon
-      :class="[(clickable && selectedId !== pokemon.id) && 'inactive clickable']"
+      :class="[selectedId === pokemon.id ? 'active' : clickable && 'clickable']"
       @click="$emit('select', pokemon.id)"
     >
       <template #title>
@@ -45,13 +45,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .inactive {
-    opacity: 0.5;
-    &:hover {
-      opacity: 0.7;
-    }
+  .card {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  .active {
+    border: 2px solid lighten($primary, 5%);
+    box-shadow: $box-shadow;
   }
   .clickable {
     cursor: pointer;
+    &:hover {
+      box-shadow: $box-shadow-sm;
+    }
   }
 </style>

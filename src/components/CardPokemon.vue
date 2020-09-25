@@ -19,9 +19,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .card:hover {
-    box-shadow: $box-shadow-sm;
-  }
   span.badge {
     font-weight: normal;
   }
