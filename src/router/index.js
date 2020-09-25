@@ -8,7 +8,7 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: {
-      layout: 'default',
+      layout: 'default-with-sidebar',
       showInNavbar: true
     }
   },
