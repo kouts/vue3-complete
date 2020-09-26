@@ -1,27 +1,15 @@
 <template>
-  <div>
+  <div class="container">
     <h1 class="mb-4">Home</h1>
     <div class="row">
-      <div class="col d-flex flex-row flex-wrap">
-        <div v-for="photo in currentAlbumPhotos" :key="photo.id">
-          <img :src="photo.thumbnailUrl" loading="lazy" alt="" />
-        </div>
+      <div class="col">
+        <p>This is the home page</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { useStore } from 'vuex';
-import { computed } from 'vue';
-
 export default {
-  setup() {
-    const store = useStore();
-    const currentAlbumPhotos = computed(() => store.state.photos.currentAlbumPhotos);
-    return {
-      currentAlbumPhotos
-    };
-  }
 };
 </script>
