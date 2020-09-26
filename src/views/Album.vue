@@ -8,10 +8,12 @@
       <h1 class="mb-0">Album</h1>
       <p>{{ currentAlbum.title }}</p>
     </div>
-    <router-view />
     <div v-if="loading">
       Loading ...
     </div>
+    <template v-else>
+      <router-view />
+    </template>
   </div>
 </template>
 
