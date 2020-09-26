@@ -8,7 +8,7 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: {
-      layout: 'albums-with-sidebar',
+      layout: 'default',
       showInNavbar: true
     }
   },
@@ -66,6 +66,26 @@ const routes = [
       layout: 'default',
       showInNavbar: true
     }
+  },
+  {
+    path: '/albums',
+    name: 'Albums',
+    component: () => import(/* webpackChunkName: "albums" */ '../views/Albums.vue'),
+    meta: {
+      layout: 'albums-with-sidebar',
+      showInNavbar: true
+    }
+    // ,
+    // children: [
+    //   {
+    //     path: '/albums/:id',
+    //     name: 'Album',
+    //     component: () => import(/* webpackChunkName: "album" */ '../views/Post.vue'),
+    //     meta: {
+    //       showInNavbar: false
+    //     }
+    //   }
+    // ]
   }
 ];
 const router = createRouter({
