@@ -14,6 +14,9 @@
 </template>
 
 <script>
+import { watch, reactive } from 'vue';
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
 import DefaultNav from '@/layouts/default/DefaultNav.vue';
 import AlbumsSidebar from './AlbumsSidebar.vue';
 import DefaultFooter from '@/layouts/default/DefaultFooter.vue';
@@ -23,6 +26,17 @@ export default {
     DefaultNav,
     AlbumsSidebar,
     DefaultFooter
+  },
+  setup() {
+    const route = reactive(useRoute());
+    const store = useStore();
+    store.dispatch('albums/fetchAlbums');
+    watch(() => route.params, async(newParams, oldParams) => {
+      await store.dispatch('photos/fetchPhotosOfAlbum', newParams.id);
+      store.dispatch('albums/fetchCurrentAlbum', newParams.id);
+    }, {
+      immediate: true
+    });
   }
 };
 </script>

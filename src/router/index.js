@@ -49,7 +49,7 @@ const routes = [
     },
     children: [
       {
-        path: '/posts/:id',
+        path: ':id',
         name: 'Post',
         component: () => import(/* webpackChunkName: "post" */ '../views/Post.vue'),
         meta: {
@@ -70,22 +70,21 @@ const routes = [
   {
     path: '/albums',
     name: 'Albums',
-    component: () => import(/* webpackChunkName: "albums" */ '../views/Albums.vue'),
+    component: () => import(/* webpackChunkName: "albums" */ '../views/Album.vue'),
     meta: {
       layout: 'albums-with-sidebar',
       showInNavbar: true
-    }
-    // ,
-    // children: [
-    //   {
-    //     path: '/albums/:id',
-    //     name: 'Album',
-    //     component: () => import(/* webpackChunkName: "album" */ '../views/Post.vue'),
-    //     meta: {
-    //       showInNavbar: false
-    //     }
-    //   }
-    // ]
+    },
+    children: [
+      {
+        path: ':id',
+        name: 'AlbumPhotos',
+        component: () => import(/* webpackChunkName: "album-photos" */ '../views/AlbumPhotos.vue'),
+        meta: {
+          showInNavbar: false
+        }
+      }
+    ]
   }
 ];
 const router = createRouter({
