@@ -1,6 +1,6 @@
 <template>
   <li>
-    <a class="nav-link" href="#" @click.prevent="click">
+    <a :class="['nav-link', active && 'active']" href="#" @click.prevent="click">
       {{ title }}
     </a>
   </li>
@@ -20,6 +20,10 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    active: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['click'],

@@ -15,6 +15,7 @@
           :key="album.id"
           :user-id="album.userId"
           :title="album.title"
+          :active="$store.state.albums.currentAlbum.id === album.id"
           class="nav-item"
           @click="albumClicked"
         />
@@ -24,8 +25,10 @@
 </template>
 
 <script>
-import { useStore } from 'vuex';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+
 import AlbumsSidebarLink from './AlbumsSidebarLink.vue';
 
 export default {
@@ -33,14 +36,14 @@ export default {
     AlbumsSidebarLink
   },
   setup() {
+    const router = useRouter();
     const store = useStore();
     const albums = computed(() => store.state.albums.albums);
 
     const albumClicked = (albumId) => {
-      store.dispatch('photos/fetchPhotosOfAlbum', albumId);
+      router.push({ name: 'AlbumPhotos', params: { id: albumId } });
     };
 
-    store.dispatch('albums/fetchAlbums');
     return {
       albums,
       albumClicked
