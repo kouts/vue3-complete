@@ -9,6 +9,9 @@
       <p>{{ currentAlbum.title }}</p>
     </div>
     <router-view />
+    <div v-if="loading">
+      Loading ...
+    </div>
   </div>
 </template>
 
@@ -20,8 +23,10 @@ export default {
   setup() {
     const store = useStore();
     const currentAlbum = computed(() => store.state.albums.currentAlbum);
+    const loading = computed(() => store.state.photos.loading);
     return {
-      currentAlbum
+      currentAlbum,
+      loading
     };
   }
 };

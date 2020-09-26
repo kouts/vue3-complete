@@ -63,5 +63,6 @@ export default {
   /* Content */
   [role="main"] {
     padding-top: 5em; /* Space for fixed navbar */
+    padding-bottom: 5.5em;
   }
 </style>

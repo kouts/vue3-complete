@@ -56,7 +56,7 @@ export default {
     };
 
     watchEffect(() => {
-      console.log(route.params);
+      console.log('Route params: ', route.params);
     });
 
     return {

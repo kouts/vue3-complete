@@ -15,7 +15,7 @@
           :key="album.id"
           :user-id="album.userId"
           :title="album.title"
-          :active="$store.state.albums.currentAlbum.id === album.id"
+          :active="active(album.id)"
           class="nav-item"
           @click="albumClicked"
         />
@@ -39,6 +39,12 @@ export default {
     const router = useRouter();
     const store = useStore();
     const albums = computed(() => store.state.albums.albums);
+    const active = (albumId) => {
+      if (store.state.albums.currentAlbum && store.state.albums.currentAlbum.id === albumId) {
+        return true;
+      }
+      return false;
+    };
 
     const albumClicked = (albumId) => {
       router.push({ name: 'AlbumPhotos', params: { id: albumId } });
@@ -46,7 +52,8 @@ export default {
 
     return {
       albums,
-      albumClicked
+      albumClicked,
+      active
     };
   }
 };

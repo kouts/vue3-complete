@@ -1,6 +1,5 @@
 import { testPosts } from '@/store-blog/testPosts';
-
-const delay = (ms) => new Promise((resolve, reject) => setTimeout(resolve, ms));
+import { delay } from '@/common/utils';
 
 export const posts = {
   namespaced: true,
