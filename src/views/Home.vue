@@ -2,8 +2,10 @@
   <div>
     <h1 class="mb-4">Home</h1>
     <div class="row">
-      <div v-for="photo in currentAlbumPhotos" :key="photo.id" class="col-sm-2">
-        <img :src="photo.thumbnailUrl" loading="lazy" alt="" />
+      <div class="col d-flex flex-row flex-wrap">
+        <div v-for="photo in currentAlbumPhotos" :key="photo.id">
+          <img :src="photo.thumbnailUrl" loading="lazy" alt="" />
+        </div>
       </div>
     </div>
   </div>
