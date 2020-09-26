@@ -8,7 +8,8 @@
         {{ pokemon.name }} #{{ pokemon.id }}
       </template>
       <template #content>
-        <img class="card-img-top" loading="lazy" :src="pokemon.sprite" :alt="pokemon.name" />
+        <!-- <img class="card-img-top" loading="lazy" :src="pokemon.sprite" :alt="pokemon.name" /> -->
+        <img class="card-img-top" loading="lazy" :src="`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`" :alt="pokemon.name" />
       </template>
       <template #description>
         <span v-for="type in pokemon.types" :key="type" class="badge badge-pill badge-primary mr-2">
