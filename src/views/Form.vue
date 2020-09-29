@@ -38,6 +38,11 @@
             {{ x }} - {{ y }}
           </div>
         </div>
+        <div class="row mb-4">
+          <div class="col">
+            <h3>{{ messageToBeResetted }}</h3>
+          </div>
+        </div>
         <hr />
         <div class="row mb-4">
           <div class="col">
@@ -78,6 +83,7 @@ import { clone } from '@/common/utils';
 import { useMousePosition } from '@/composables/useMousePosition';
 import InputWrapper from '@/components/wrappers/InputWrapper.vue';
 import InputWrapperComputed from '@/components/wrappers/InputWrapperComputed.vue';
+import { useMessageReset } from '@/composables/useMessageReset';
 
 export default {
   name: 'Home',
@@ -93,6 +99,9 @@ export default {
     const wrapperKeydown = (e) => {
       console.log('wrapperKeydown', e.target.value);
     };
+
+    const messageToBeResetted = ref('This message will reset after 5 seconds');
+    useMessageReset(messageToBeResetted);
 
     const data = reactive({
       firstName: 'Giannis',
@@ -126,7 +135,8 @@ export default {
       y,
       wrapperInputText,
       wrapperKeydown,
-      wrapperInputComputedText
+      wrapperInputComputedText,
+      messageToBeResetted
     };
   }
 };
