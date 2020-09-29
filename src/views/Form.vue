@@ -38,6 +38,19 @@
             {{ x }} - {{ y }}
           </div>
         </div>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <input-wrapper
+              v-model="wrapperInputText"
+              label="Input wrapper label"
+              placeholder="Test placeholder"
+              class="form-control"
+              @keydown="wrapperKeydown"
+            />
+            <small>{{ wrapperInputText }}</small>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -49,14 +62,21 @@ import MyButton from '@/components/MyButton.vue';
 import MyInput from '@/components/MyInput.vue';
 import { clone } from '@/common/utils';
 import { useMousePosition } from '@/composables/useMousePosition';
+import InputWrapper from '@/components/InputWrapper.vue';
 
 export default {
   name: 'Home',
   components: {
     MyButton,
-    MyInput
+    MyInput,
+    InputWrapper
   },
   setup() {
+    const wrapperInputText = ref('Test text...');
+    const wrapperKeydown = (e) => {
+      console.log('wrapperKeydown', e.target.value);
+    };
+
     const data = reactive({
       firstName: 'Giannis',
       lastName: 'Koutsaftakis'
@@ -68,7 +88,8 @@ export default {
       username: '',
       usernameValid: false,
       password: '',
-      passwordValid: false
+      passwordValid: false,
+      testText: ''
     });
 
     const valid = computed(() => {
@@ -85,7 +106,9 @@ export default {
       submit,
       ...toRefs(data),
       x,
-      y
+      y,
+      wrapperInputText,
+      wrapperKeydown
     };
   }
 };
