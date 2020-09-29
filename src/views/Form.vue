@@ -39,8 +39,9 @@
           </div>
         </div>
         <hr />
-        <div class="row">
+        <div class="row mb-4">
           <div class="col">
+            <h3>Input wrapper</h3>
             <input-wrapper
               v-model="wrapperInputText"
               label="Input wrapper label"
@@ -49,6 +50,19 @@
               @keydown="wrapperKeydown"
             />
             <small>{{ wrapperInputText }}</small>
+          </div>
+        </div>
+        <hr />
+        <div class="row mb-4">
+          <div class="col">
+            <h3>Input wrapper with computed</h3>
+            <input-wrapper
+              v-model="wrapperInputComputedText"
+              label="Input wrapper label"
+              placeholder="Test placeholder"
+              class="form-control"
+            />
+            <small>{{ wrapperInputComputedText }}</small>
           </div>
         </div>
       </div>
@@ -62,17 +76,20 @@ import MyButton from '@/components/MyButton.vue';
 import MyInput from '@/components/MyInput.vue';
 import { clone } from '@/common/utils';
 import { useMousePosition } from '@/composables/useMousePosition';
-import InputWrapper from '@/components/InputWrapper.vue';
+import InputWrapper from '@/components/wrappers/InputWrapper.vue';
+import InputWrapperComputed from '@/components/wrappers/InputWrapperComputed.vue';
 
 export default {
   name: 'Home',
   components: {
     MyButton,
     MyInput,
-    InputWrapper
+    InputWrapper,
+    InputWrapperComputed
   },
   setup() {
     const wrapperInputText = ref('Test text...');
+    const wrapperInputComputedText = ref('Test text 2');
     const wrapperKeydown = (e) => {
       console.log('wrapperKeydown', e.target.value);
     };
@@ -108,7 +125,8 @@ export default {
       x,
       y,
       wrapperInputText,
-      wrapperKeydown
+      wrapperKeydown,
+      wrapperInputComputedText
     };
   }
 };
