@@ -56,7 +56,7 @@
         <div class="row mb-4">
           <div class="col">
             <h3>Input wrapper with computed</h3>
-            <input-wrapper
+            <input-wrapper-computed
               v-model="wrapperInputComputedText"
               label="Input wrapper label"
               placeholder="Test placeholder"

@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { useModelWrapper } from '@/composables/useModelWrapper';
 
 export default {
   props: {
@@ -19,10 +19,7 @@ export default {
   },
   emits: ['update:modelValue'],
   setup(props, ctx) {
-    const internalValue = computed({
-      get: () => props.modelValue,
-      set: (value) => ctx.emit('update:modelValue', value)
-    });
+    const internalValue = useModelWrapper(props, ctx.emit);
     return {
       internalValue
     };
