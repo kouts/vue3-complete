@@ -1,10 +1,10 @@
 <template>
   <label>{{ label }}</label>
-  <input v-model="internalValue" type="text" v-bind="$attrs" />
+  <input v-model="localValue" type="text" v-bind="$attrs" />
 </template>
 
 <script>
-import { useModelWrapper } from '@/composables/useModelWrapper';
+import { computed } from 'vue';
 
 export default {
   props: {
@@ -18,10 +18,13 @@ export default {
     }
   },
   emits: ['update:modelValue'],
-  setup(props, ctx) {
-    const internalValue = useModelWrapper(props, ctx.emit);
+  setup(props, context) {
+    const localValue = computed({
+      get: () => props.modelValue,
+      set: (value) => context.emit('update:modelValue', value)
+    });
     return {
-      internalValue
+      localValue
     };
   }
 };

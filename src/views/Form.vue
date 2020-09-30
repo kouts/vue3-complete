@@ -58,6 +58,7 @@
           </div>
         </div>
         <hr />
+        <!--
         <div class="row mb-4">
           <div class="col">
             <h3>Input wrapper with computed</h3>
@@ -66,6 +67,19 @@
               label="Input wrapper label"
               placeholder="Test placeholder"
               class="form-control"
+            />
+            <small>{{ wrapperInputComputedText }}</small>
+          </div>
+        </div>
+        -->
+        <div class="row mb-4">
+          <div class="col pt-1" style="border: 1px dashed #555">
+            <!-- <h3>Input wrapper with computed (plain)</h3> -->
+            <input-wrapper-computed-plain
+              v-model="wrapperInputComputedText"
+              label="Label"
+              placeholder=""
+              class="form-control mb-4"
             />
             <small>{{ wrapperInputComputedText }}</small>
           </div>
@@ -83,6 +97,7 @@ import { clone } from '@/common/utils';
 import { useMousePosition } from '@/composables/useMousePosition';
 import InputWrapper from '@/components/wrappers/InputWrapper.vue';
 import InputWrapperComputed from '@/components/wrappers/InputWrapperComputed.vue';
+import InputWrapperComputedPlain from '@/components/wrappers/InputWrapperComputedPlain.vue';
 import { useMessageReset } from '@/composables/useMessageReset';
 
 export default {
@@ -91,7 +106,8 @@ export default {
     MyButton,
     MyInput,
     InputWrapper,
-    InputWrapperComputed
+    InputWrapperComputed,
+    InputWrapperComputedPlain
   },
   setup() {
     const wrapperInputText = ref('Test text...');
