@@ -53,12 +53,12 @@
               placeholder="Test placeholder"
               class="form-control"
               @keydown="wrapperKeydown"
+              @test-event="log"
             />
             <small>{{ wrapperInputText }}</small>
           </div>
         </div>
         <hr />
-        <!--
         <div class="row mb-4">
           <div class="col">
             <h3>Input wrapper with computed</h3>
@@ -71,10 +71,9 @@
             <small>{{ wrapperInputComputedText }}</small>
           </div>
         </div>
-        -->
+        <!--
         <div class="row mb-4">
           <div class="col pt-1" style="border: 1px dashed #555">
-            <!-- <h3>Input wrapper with computed (plain)</h3> -->
             <input-wrapper-computed-plain
               v-model="wrapperInputComputedText"
               label="Label"
@@ -84,6 +83,7 @@
             <small>{{ wrapperInputComputedText }}</small>
           </div>
         </div>
+        -->
       </div>
     </div>
   </div>
@@ -110,6 +110,11 @@ export default {
     InputWrapperComputedPlain
   },
   setup() {
+    const log = (attr1, attr2) => {
+      console.log(attr1);
+      console.log(attr2);
+    };
+
     const wrapperInputText = ref('Test text...');
     const wrapperInputComputedText = ref('Test text 2');
     const wrapperKeydown = (e) => {
@@ -143,6 +148,7 @@ export default {
     };
 
     return {
+      log,
       form,
       valid,
       submit,

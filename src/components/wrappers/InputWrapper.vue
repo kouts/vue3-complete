@@ -6,6 +6,11 @@
     v-bind="$attrs"
     @input="$emit('update:modelValue', $event.target.value)"
   />
+  <div>
+    <button type="button" class="btn btn-primary btn-sm mt-2" @click="$fire('test-event', 'payload1', 'payload2')">
+      Click
+    </button>
+  </div>
 </template>
 
 <script>
@@ -20,6 +25,11 @@ export default {
       default: ''
     }
   },
-  emits: ['update:modelValue']
+  emits: ['update:modelValue', 'test-event'],
+  mounted() {
+    this.$on('test-event', () => {
+      console.log('Hi!');
+    });
+  }
 };
 </script>
