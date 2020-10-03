@@ -25,11 +25,6 @@ export default {
       default: ''
     }
   },
-  emits: ['update:modelValue', 'test-event'],
-  mounted() {
-    this.$on('test-event', () => {
-      console.log('Hi!');
-    });
-  }
+  emits: ['update:modelValue', 'test-event']
 };
 </script>

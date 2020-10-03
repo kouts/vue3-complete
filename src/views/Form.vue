@@ -48,12 +48,13 @@
           <div class="col">
             <h3>Input wrapper</h3>
             <input-wrapper
+              ref="someRef"
               v-model="wrapperInputText"
               label="Input wrapper label"
               placeholder="Test placeholder"
               class="form-control"
               @keydown="wrapperKeydown"
-              @test-event="log"
+              @test-event="logTestEvent"
             />
             <small>{{ wrapperInputText }}</small>
           </div>
@@ -90,7 +91,7 @@
 </template>
 
 <script>
-import { reactive, toRefs, ref, computed } from 'vue';
+import { reactive, toRefs, ref, computed, onMounted } from 'vue';
 import MyButton from '@/components/MyButton.vue';
 import MyInput from '@/components/MyInput.vue';
 import { clone } from '@/common/utils';
@@ -101,7 +102,6 @@ import InputWrapperComputedPlain from '@/components/wrappers/InputWrapperCompute
 import { useMessageReset } from '@/composables/useMessageReset';
 
 export default {
-  name: 'Home',
   components: {
     MyButton,
     MyInput,
@@ -109,11 +109,17 @@ export default {
     InputWrapperComputed,
     InputWrapperComputedPlain
   },
-  setup() {
-    const log = (attr1, attr2) => {
-      console.log(attr1);
-      console.log(attr2);
+  setup(props, ctx) {
+    const logTestEvent = (param1, param2) => {
+      console.log('logTestEvent: ', param1, param2);
     };
+
+    const someRef = ref(null);
+    onMounted(function() {
+      someRef.value.$once('test-event', function(payload1, payload2) {
+        console.log('once: ', payload1, payload2);
+      });
+    });
 
     const wrapperInputText = ref('Test text...');
     const wrapperInputComputedText = ref('Test text 2');
@@ -148,7 +154,7 @@ export default {
     };
 
     return {
-      log,
+      logTestEvent,
       form,
       valid,
       submit,
@@ -158,7 +164,8 @@ export default {
       wrapperInputText,
       wrapperKeydown,
       wrapperInputComputedText,
-      messageToBeResetted
+      messageToBeResetted,
+      someRef
     };
   }
 };

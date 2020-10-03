@@ -7,9 +7,10 @@ export const createEmitter = (options = {}) => {
   return {
     install: (app, options) => {
       const eventEmitter = dush();
-      app.config.globalProperties.$on = eventEmitter.on;
-      app.config.globalProperties.$off = eventEmitter.off;
-      app.config.globalProperties.$once = eventEmitter.once;
+      const self = app.config.globalProperties;
+      self.$on = eventEmitter.on;
+      self.$off = eventEmitter.off;
+      self.$once = eventEmitter.once;
       app.mixin({
         beforeCreate() {
           this[settings.emitMethodName] = (event, ...args) => {
