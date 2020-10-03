@@ -13,7 +13,7 @@ export const createEmitter = (options = {}) => {
       app.mixin({
         beforeCreate() {
           this[settings.emitMethodName] = (event, ...args) => {
-            const e = eventEmitter.emit(event, ...args);
+            eventEmitter.emit(event, ...args);
             this.$emit(event, ...args);
           };
         }
